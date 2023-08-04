@@ -30,7 +30,7 @@ public class ResumeView {
 
         return new PersonInfo(photo, name, email, address, phoneNumber, birthDate);
     }
-    public List<Education> inputEduationList(){
+    public List<Education> inputEducationList(){
         List<Education> educationList = new ArrayList<>();
 
         while (true) {
@@ -57,5 +57,44 @@ public class ResumeView {
         }
 
         return educationList;
+    }
+
+    public List<Career> inputCareerList(){
+        List<Career> careerList = new ArrayList<>();
+
+        while(true) {
+            System.out.println("경력 정보를 입력하세요 (종료는 q):");
+            System.out.println("근무기간 근무처 담당업무 근속연수");
+
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("q")) {
+                break;
+            }
+
+            String[] tokens = input.split(" ");
+            if (tokens.length != 4) {
+                System.out.println("잘못된 입력입니다.");
+                continue;
+            }
+
+            String workPeriod = tokens[0];
+            String workplace = tokens[1];
+            String duties = tokens[2];
+            String yearsEmployed = tokens[3];
+
+            careerList.add(new Career(workPeriod, workplace, duties, yearsEmployed));
+        }
+
+        return careerList;
+    }
+
+    public String inputSelfIntroduction() {
+        System.out.println("자기소개서를 입력하세요. 여러 줄을 입력하려면 빈 줄을 입력하세요.");
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while((line = scanner.nextLine()).trim().length() > 0) {
+            sb.append(line).append("\n");
+        }
+        return sb.toString().trim();
     }
 }
